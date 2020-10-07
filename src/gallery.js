@@ -55,7 +55,7 @@ function importFullSizeImage(e) {
   const description = e.target.getAttribute("alt");
   imageInModal.setAttribute("alt", description);
 }
-function deleteSourceFromModal(params) {
+function deleteSourceFromModal() {
   const imageInModal = document.querySelector(".lightbox__image");
   imageInModal.setAttribute("src", "");
 }
