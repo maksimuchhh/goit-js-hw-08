@@ -1,4 +1,5 @@
 import items from "./gallery-items.js";
+
 function renderHTML(items) {
   return items
     .map(({ preview, original, description }) => {
@@ -18,22 +19,31 @@ function renderHTML(items) {
     })
     .join("");
 }
+
 const galleryList = document.querySelector(".js-gallery");
 const galleryMarkup = renderHTML(items);
-galleryList.insertAdjacentHTML("beforeend", galleryMarkup);
 const bodyEl = document.querySelector("body");
+const imageInModal = document.querySelector(".lightbox__image");
+const modal = document.querySelector(".lightbox");
+
+galleryList.insertAdjacentHTML("beforeend", galleryMarkup);
+
 bodyEl.addEventListener("click", openModal);
 bodyEl.addEventListener("click", closeModal);
 bodyEl.addEventListener("keydown", closeModal);
+bodyEl.addEventListener("keydown", nextImage);
+bodyEl.addEventListener("keydown", previousImage);
+
 function openModal(e) {
   if (!e.target.classList.contains("gallery__image")) {
     return;
   }
-  const modal = document.querySelector(".lightbox");
+
   modal.classList.add("is-open");
   e.preventDefault();
   importFullSizeImage(e);
 }
+
 function closeModal(e) {
   if (
     !(
@@ -44,18 +54,59 @@ function closeModal(e) {
   ) {
     return;
   }
-  const modal = document.querySelector(".lightbox");
+
   modal.classList.remove("is-open");
+
   deleteSourceFromModal();
 }
+
 function importFullSizeImage(e) {
   const fullSizeImage = e.target.dataset.source;
-  const imageInModal = document.querySelector(".lightbox__image");
   imageInModal.setAttribute("src", fullSizeImage);
   const description = e.target.getAttribute("alt");
   imageInModal.setAttribute("alt", description);
 }
+
 function deleteSourceFromModal() {
-  const imageInModal = document.querySelector(".lightbox__image");
   imageInModal.setAttribute("src", "");
+}
+
+function nextImage(e) {
+  if (!(e.key === "ArrowRight")) {
+    return;
+  }
+
+  let index = items.findIndex((el) => {
+    return el.original === imageInModal.getAttribute("src");
+  });
+
+  if (index === items.length - 1) {
+    index = 0;
+  }
+
+  index += 1;
+
+  const nextPic = items[index].original;
+
+  imageInModal.setAttribute("src", nextPic);
+}
+
+function previousImage(e) {
+  if (!(e.key === "ArrowLeft")) {
+    return;
+  }
+
+  let index = items.findIndex((el) => {
+    return el.original === imageInModal.getAttribute("src");
+  });
+
+  if (index === 0) {
+    index = items.length;
+  }
+
+  index -= 1;
+
+  const previousPic = items[index].original;
+
+  imageInModal.setAttribute("src", previousPic);
 }
