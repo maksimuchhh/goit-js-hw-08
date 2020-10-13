@@ -82,13 +82,14 @@ function nextImage(e) {
 
   if (index === items.length - 1) {
     index = 0;
+  } else {
+    index += 1;
   }
-
-  index += 1;
-
   const nextPic = items[index].original;
+  const nextDescr = items[index].description;
 
   imageInModal.setAttribute("src", nextPic);
+  imageInModal.setAttribute("alt", nextDescr);
 }
 
 function previousImage(e) {
@@ -107,6 +108,8 @@ function previousImage(e) {
   index -= 1;
 
   const previousPic = items[index].original;
+  const previousDescr = items[index].description;
 
   imageInModal.setAttribute("src", previousPic);
+  imageInModal.setAttribute("alt", previousDescr);
 }
