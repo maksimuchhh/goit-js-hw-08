@@ -1,0 +1,25 @@
+{
+  "name": "goit-js-hw-08",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maksimuchhh/goit-js-hw-08.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maksimuchhh/goit-js-hw-08/issues"
+  },
+  "homepage": "https://github.com/maksimuchhh/goit-js-hw-08#readme",
+  "dependencies": {
+    "parcel-bundler": "^1.12.4"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "description": ""
+}
