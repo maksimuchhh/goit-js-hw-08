@@ -1,4 +1,5 @@
-import items from "./gallery-items.js";
+import items from "./images/gallery-items";
+import './styles/my-style.css';
 
 function renderHTML(items) {
   return items
